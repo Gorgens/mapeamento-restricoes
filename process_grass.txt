@@ -1,0 +1,12 @@
+r.in.lidar -o -e --overwrite input=/home/gorgens/Documents/grassdata/INPE/d_universal/NP_T-403.las output=t403_min method=min resolution=1
+
+g.region raster=t403_min@universal
+
+r.neighbors --overwrite input=t403_min@universal output=t403_mdt method=min size=7
+r.neighbors --overwrite input=t403_mdt@universal output=t403_mdt_v2 method=median size=11
+
+r.in.lidar -o -e --overwrite input=/home/gorgens/Documents/grassdata/INPE/d_universal/NP_T-403.las output=t403_mds method=percentile pth=95 resolution=1
+
+r.mapcalc "t403_chm = t403_mds@universal - t403_mdt_v2@universal" --overwrite
+
+r.out.ascii --overwrite input=t403_chm@universal output=/home/gorgens/Documents/grassdata/INPE/d_universal/t403_chm precision=2 null_value=-9999
