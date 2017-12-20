@@ -12,3 +12,6 @@ r.mapcalc "t403_chm = t403_mds@universal - t403_mdt_v2@universal" --overwrite
 r.out.ascii --overwrite input=t403_chm@universal output=/home/gorgens/Documents/grassdata/INPE/d_universal/t403_chm precision=2 null_value=-9999
 
 r.mapcalc "t403_topcanopy = if( t403_chm@universal < 35 , null()  , t403_chm@universal)" --overwrite
+
+r.to.vect --overwrite input=t403_topcanopy@universal output=t403_tocanopy_vector type=area
+
