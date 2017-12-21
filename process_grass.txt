@@ -15,3 +15,8 @@ r.mapcalc "t403_topcanopy = if( t403_chm@universal < 35 , null()  , t403_chm@uni
 
 r.to.vect --overwrite input=t403_topcanopy@universal output=t403_tocanopy_vector type=area
 
+# Verify code
+v.clean input=t403_tocanopy_vector out=t403_tocanopy_vclean tool=snap,break,rmdupl thresh=.01
+v.dissolve input=t403_tocanopy_vclean@universal output=t403_tocanopy_vdissolve@universal
+v.db.addcolumn map=t403_tocanopy_vector@universal columns="area_m DOUBLE PRECISION"
+v.to.db map=t403_tocanopy_vector@universal option=area columns=area_m units=meters
