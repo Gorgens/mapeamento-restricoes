@@ -1,8 +1,9 @@
 # Author: Gorgens, E. B.
 # Pourpose: Process LiDAR transects and extract trees of interest
 
-# 1 = NP_T-403
-# 2 = t403
+# How to use: sh process_trans.sh NP_T-356 t356 35 6
+# 1 = NP_T-356
+# 2 = t356
 # 3 = 35
 # 4 = 6
 
