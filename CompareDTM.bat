@@ -8,3 +8,5 @@
 C:\fusion\GroundFilter C:\fusion\data\NP_T-403_gdf.las 8 C:\fusion\data\NP_T-403.las
 
 C:\fusion\GridSurfaceCreate C:\fusion\data\NP_T-403_dtm.dtm 1 M M 1 0 0 0 C:\fusion\data\NP_T-403_gdf.las
+
+C:\fusion\DTM2ASCII NP_T-403_dtm.dtm NP_T-403_dtm.asc
