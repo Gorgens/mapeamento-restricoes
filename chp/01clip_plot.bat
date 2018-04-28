@@ -1,0 +1,45 @@
+set LAS_TILES="C:\CENIBRA\RDPOPO00435_Januaria_NP\RDPOPO00435_Januaria_NP-*.las"
+set FILTERED_FILE="C:\CENIBRA\RDPOPO00435_Januaria_NP\RDPOPO00435_Januaria_NPFilt.las"
+set DTM_FILE="C:\CENIBRA\RDPOPO00435_Januaria_DTM\RDPOPO00435_Januaria_DTM.dtm"
+set DTM_ASC="C:\CENIBRA\RDPOPO00435_Januaria_DTM\RDPOPO00435_Januaria_DTM.asc"
+
+REM FilterData [switches] FilterType FilterParms WindowSize OutputFile DataFile
+c:\fusion\FilterData outlier 4 10 %FILTERED_FILE% %LAS_TILES%
+pause
+
+REM ASCII2DTM [switches] surfacefile xyunits zunits coordsys zone horizdatum vertdatum gridfile
+c:\fusion\ASCII2DTM %DTM_FILE% m m 1 23 0 0 %DTM_ASC%
+pause
+
+REM ClipData [switches] InputSpecifier SampleFile MinX MinY MaxX MaxY
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot1 759652.442523 7888480.65344 759682.442523 7888510.65344
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot2 759858.494926 7887953.54265 759888.494926 7887983.54265
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot3 759858.494926 7887783.42962 759888.494926 7887813.42962
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot4 759829.743428 7887546.22976 759859.743428 7887576.22976
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot5 760241.848234 7887464.76718 760271.848234 7887494.76718
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot6 760167.57353 7887507.89443 760197.57353 7887537.89443
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot7 760153.197781 7887757.07408 760183.197781 7887787.07408
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot8 760352.06231 7887783.42962 760382.06231 7887813.42962
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot9 760773.750949 7888094.90418 760803.750949 7888124.90418
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot10 760591.658127 7888121.25972 760621.658127 7888151.25972
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot11 760546.134922 7887972.71031 760576.134922 7888002.71031
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot12 760392.793599 7887919.99923 760422.793599 7887949.99923
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot13 760114.862451 7888308.14446 760144.862451 7888338.14446
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot14 760007.044333 7888243.45359 760037.044333 7888273.45359
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot15 760028.607956 7888097.30014 760058.607956 7888127.30014
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot16 760093.681227 7887945.10879 760123.681227 7887975.10879
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot17 760165.177572 7887982.29414 760195.177572 7888012.29414
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot18 760181.912 7888184.4021 760211.912 7888214.4021
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot19 759912.9918 7887396.4412 759942.9918 7887426.4412
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot20 759645.254648 7888173.9708 759675.254648 7888203.9708
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot21 759561.6548 7888095.3771 759591.6548 7888125.3771
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot22 760092.47882 7888035.68429 760122.47882 7888065.68429
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot23 760079.256206 7887719.44344 760109.256206 7887749.44344
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot24 759800.011675 7888264.8432 759830.011675 7888294.8432
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot25 759878.8264 7888146.3951 759908.8264 7888176.3951
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot26 760234.688374 7887619.78021 760264.688374 7887649.78021
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot27 759745.804783 7888066.70294 759775.804783 7888096.70294
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot28 759799.245499 7887690.63864 759829.245499 7887720.63864
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot29 760108.014083 7888151.81223 760138.014083 7888181.81223
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\jan_plot30 759694.684222 7887553.68904 759724.684222 7887583.68904
+pause

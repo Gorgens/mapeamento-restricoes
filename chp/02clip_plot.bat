@@ -1,0 +1,45 @@
+set LAS_TILES="C:\CENIBRA\NEPIAL00248_Serra_NP\NEPIAL00248_Serra_NP-*.las"
+set FILTERED_FILE="C:\CENIBRA\NEPIAL00248_Serra_NP\NEPIAL00248_Serra_NPFilt.las"
+set DTM_FILE="C:\CENIBRA\NEPIAL00248_Serra_DTM\NEPIAL00248_Serra_DTM.dtm"
+set DTM_ASC="C:\CENIBRA\NEPIAL00248_Serra_DTM\NEPIAL00248_Serra_DTM.asc"
+
+REM FilterData [switches] FilterType FilterParms WindowSize OutputFile DataFile
+REM c:\fusion\FilterData outlier 4 10 %FILTERED_FILE% %LAS_TILES%
+REM pause
+
+REM ASCII2DTM [switches] surfacefile xyunits zunits coordsys zone horizdatum vertdatum gridfile
+REM c:\fusion\ASCII2DTM %DTM_FILE% m m 1 23 0 0 %DTM_ASC%
+REM pause
+
+REM ClipData [switches] InputSpecifier SampleFile MinX MinY MaxX MaxY
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot1 737428.570394 7813369.27661 737458.570394 7813399.27661
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot2 737262.398841 7813312.53511 737292.398841 7813342.53511
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot3 737542.053406 7813199.05209 737572.053406 7813229.05209
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot4 737481.258935 7813053.14536 737511.258935 7813083.14536
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot5 737392.093712 7812984.24496 737422.093712 7813014.24496
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot6 737021.449193 7812925.74374 737051.449193 7812955.74374
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot7 737060.588996 7812804.41035 737090.588996 7812834.41035
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot8 737270.639272 7812744.39598 737300.639272 7812774.39598
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot9 737946.453203 7812739.17734 737976.453203 7812769.17734
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot10 737675.083902 7812624.36725 737705.083902 7812654.36725
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot11 737543.313232 7812338.64669 737573.313232 7812368.64669
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot12 737980.374365 7812540.86901 738010.374365 7812570.86901
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot13 737419.370523 7812643.93716 737449.370523 7812673.93716
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot14 737934.711262 7813017.06994 737964.711262 7813047.06994
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot15 736918.237985 7812444.39045 736948.237985 7812474.39045
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot16 737071.696625 7812388.82784 737101.696625 7812418.82784
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot17 737349.509681 7812338.5569 737379.509681 7812368.5569
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot18 737193.405202 7812518.47393 737223.405202 7812548.47393
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot19 736915.592146 7812626.95331 736945.592146 7812656.95331
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot20 737837.999985 7813681.04438 737867.999985 7813711.04438
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot21 737586.483409 7813771.26228 737616.483409 7813801.26228
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot22 737654.830305 7813631.83462 737684.830305 7813661.83462
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot23 737898.145253 7813465.06819 737928.145253 7813495.06819
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot24 738439.452667 7813265.49526 738469.452667 7813295.49526
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot25 738302.758876 7813183.47898 738332.758876 7813213.47898
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot26 738051.2423 7813191.68061 738081.2423 7813221.68061
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot27 737868.072619 7813172.54348 737898.072619 7813202.54348
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot28 737816.128979 7813320.17277 737846.128979 7813350.17277
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot29 737668.372058 7812865.68875 737698.372058 7812895.68875
+c:\fusion\ClipData /shape:0 /dtm:%DTM_FILE% /height %FILTERED_FILE% C:\CENIBRA\plots\serra_plot30 738034.720189 7812855.25627 738064.720189 7812885.25627
+pause
