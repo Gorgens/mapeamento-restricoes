@@ -3,9 +3,9 @@
 Resumo apresentado no VI SINTEGRA - 2018
 
 Área: Agricultura
+
 Subárea: Recursos Florestais e Engenharia Florestal
-Modalidade: Apresentação Oral
-Categoria: Graduação Pesquisa
+
 Autores: Silva BHL*, Andrade MSS, Reis CR, Gorgens EB.
 
 ## Resumo de apresentação  
