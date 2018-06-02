@@ -7,5 +7,8 @@
 
 ## As camadas de informações são baseadas nas seguintes duperfícies:
 1. DTM
+  - createDtm.py
 2. CHM
+  - createChm.py
+  - createTch.py
 3. Outros
