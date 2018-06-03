@@ -11,4 +11,5 @@
 2. CHM
   - createChm.py
   - createTch.py
+  - createTop.py
 3. Outros
