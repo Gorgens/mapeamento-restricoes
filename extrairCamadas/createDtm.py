@@ -3,10 +3,11 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\pcf637\\python\\createDtm.py')
 '''
 
-def doDtm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", FILTERCELL = "8", GNDLAS = "C:\\FUSION\\pcf637\\mdt\\upa_1gnd.laz", DTMCELL = "1", ASCDTM = "C:\\FUSION\\pcf637\\mdt\\upa_1.asc", show = True, EPSG = 31982):
+def doDtm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", FILTERCELL = "8", GNDLAS = "C:\\FUSION\\pcf637\\mdt\\upa_1gnd.laz", DTMCELL = "1", ASCDTM = "C:\\FUSION\\pcf637\\mdt\\upa_1.asc", EPSG = 31982):
 	
 	import subprocess
-	'Padrao do fusion'
+	show = True
+	
 	GNDFUN = "c:\\fusion\\groundfilter"
 	DTMFUN = "c:\\fusion\\gridsurfacecreate"
 	ASCFUN = "c:\\fusion\\dtm2ascii"
@@ -34,11 +35,8 @@ def doDtm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf
 		
 	if show:
 		crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
-
-		'Importar CHM criado'
 		rlayer = QgsRasterLayer(ASCDTM, "DTM")
 		rlayer.setCrs(crs)
-
 		QgsMapLayerRegistry.instance().addMapLayer(rlayer)
 	
 	return "Done!"

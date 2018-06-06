@@ -3,10 +3,11 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\pcf637\\python\\createChm.py')
 '''
 
-def doChm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", CHM = "C:\\FUSION\\pcf637\\chm\\upa_1chm.dtm", CHMCELL = "1", show = True, EPSG = 31982):
+def doChm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", CHM = "C:\\FUSION\\pcf637\\chm\\upa_1chm.dtm", CHMCELL = "1", EPSG = 31982):
 	
 	import subprocess
-	'Padrao do fusion'
+	show = True
+	
 	GND = "/ground:" + DTM
 	ASC = "/ascii"
 	CHMFUN = "c:\\fusion\\canopymodel"
@@ -21,11 +22,8 @@ def doChm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf
 	
 	if show:
 		crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
-
-		'Importar CHM criado'
 		rlayer = QgsRasterLayer(CHMASC, "CHM")
 		rlayer.setCrs(crs)
-
 		QgsMapLayerRegistry.instance().addMapLayer(rlayer)
 		
 	return "Done!"
