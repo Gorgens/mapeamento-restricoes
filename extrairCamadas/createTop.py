@@ -3,8 +3,8 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\pcf637\\python\\createTop.py')
 '''
 
-def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA = "9", TOPCROWN = "C:\\FUSION\\pcf637\\chm\\upa_1topCrowns.tif",  TOPMSK = "C:\\FUSION\\pcf637\\chm\\upa_1topMask.tif",TOPSHP = "C:\\FUSION\\pcf637\\chm\\upa_1topVec.shp",TOPTREE = "C:\\FUSION\\pcf637\\chm\\upa_1topTree.shp",   EPSG = 31982):
-	
+def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA = "9", TOPCROWN = "C:\\FUSION\\pcf637\\chm\\upa_1topCrowns.tif",  TOPMSK = "C:\\FUSION\\pcf637\\chm\\upa_1topMask.tif",TOPSHP = "C:\\FUSION\\pcf637\\chm\\upa_1topVec.shp",TOPTREE = "C:\\FUSION\\pcf637\\chm\\upa_1topTree.shp", EPSG = 31982):
+
 	import processing
 	show = True
 	
@@ -92,7 +92,6 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	xmax = extent.xMaximum()
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
-	'carrega camada no canvas do QGIS'
 	if show:
 		QgsMapLayerRegistry.instance().addMapLayer(crownlayer)
 	
