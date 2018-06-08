@@ -1,12 +1,18 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\python\\createTop.py')
+execfile('C:\\QGIS\\createTop.py')
 '''
 
-def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA = "9", TOPCROWN = "C:\\FUSION\\pcf637\\chm\\upa_1topCrowns.tif",  TOPMSK = "C:\\FUSION\\pcf637\\chm\\upa_1topMask.tif",TOPSHP = "C:\\FUSION\\pcf637\\chm\\upa_1topVec.shp",TOPTREE = "C:\\FUSION\\pcf637\\chm\\upa_1topTree.shp", EPSG = 31982):
+def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMSK = "topMask.tif",TOPSHP = "topVec.shp",TOPTREE = "topTree.shp", EPSG = 31982):
 
 	import processing
+	import os
+	from osgeo import ogr
+	
 	show = True
+	export = True
+	INPATH = "E:\\Users\\USUARIO\\Documents\\GIS DataBase\\Norte\\"
+	OUTPATH = "C:\\QGIS\\"
 	
 	'define projecao a ser usada'
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
@@ -17,10 +23,19 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	2. define a projecao da camada importada na etapa 1
 	3. carrega a camada no canvas do qgis
 	'''
-	chmlayer = QgsRasterLayer(CHMASC, "CHM")
+	chmlayer = QgsRasterLayer(INPATH+CHMASC, "CHM")
 	chmlayer.setCrs(crs)
 	if show:
 		QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
+	
+	
+	'''
+	Extrair valor maximo da camada CHM e utilizar como referencia para o parametro HEIGHT
+	'''
+	extent = chmlayer.extent()
+	provider = chmlayer.dataProvider()
+	stats = provider.bandStatistics(1, QgsRasterBandStats.All, extent, 0)
+	HEIGHT = str(round(stats.maximumValue - 10))
 	
 	'''
 	A partir do CHM importado anteriormente, filtra os pixels acima de uma determianda altura criando
@@ -32,8 +47,8 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	5. carrega a camada no canvas qgis
 	'''
 	CALC1 = "ifelse(a<"+HEIGHT+",-99999,a)"
-	processing.runalg("saga:rastercalculator", chmlayer, None, CALC1, 3, False, 7, TOPCROWN)
-	toplayer = QgsRasterLayer(TOPCROWN, "top crowns")
+	processing.runalg("saga:rastercalculator", chmlayer, None, CALC1, 3, False, 7, OUTPATH+TOPCROWN)
+	toplayer = QgsRasterLayer(OUTPATH+TOPCROWN, "top crowns")
 	toplayer.setCrs(crs)
 	if show:
 		QgsMapLayerRegistry.instance().addMapLayer(toplayer)
@@ -49,8 +64,8 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	6. carrega a mascara no canvas qgis
 	'''
 	CALC2 = "ifelse(a<"+HEIGHT+",-99999,1)"
-	processing.runalg("saga:rastercalculator", chmlayer, None, CALC2, 3, False, 7, TOPMSK)
-	msklayer = QgsRasterLayer(TOPMSK, "mascara")
+	processing.runalg("saga:rastercalculator", chmlayer, None, CALC2, 3, False, 7, OUTPATH+TOPMSK)
+	msklayer = QgsRasterLayer(OUTPATH+TOPMSK, "mascara")
 	msklayer.setCrs(crs)
 	extent = msklayer.extent()
 	xmin = extent.xMinimum()
@@ -67,8 +82,8 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	3. define a projecao da camada de poligonos
 	4. carrega a camada no canvas qgis
 	'''
-	processing.runalg("grass7:r.to.vect", msklayer, 2, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, TOPSHP)
-	vlayer = QgsVectorLayer(TOPSHP, "crowns vectors", "ogr")
+	processing.runalg("grass7:r.to.vect", msklayer, 2, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+TOPSHP)
+	vlayer = QgsVectorLayer(OUTPATH+TOPSHP, "crownVectors", "ogr")
 	vlayer.setCrs(crs)
 	if show:
 		QgsMapLayerRegistry.instance().addMapLayer(vlayer)
@@ -83,9 +98,9 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	5. extrai a extensao da mascara
 	6. carrega a camada no canvas qgis
 	'''
-	TOPSHP2 = TOPSHP[0:len(TOPSHP)-4] + "Area.shp"
-	processing.runalg('qgis:fieldcalculator', vlayer, 'area', 0, 10, 2, True, '$area', TOPSHP2)
-	crownlayer = QgsVectorLayer(TOPSHP2, "crown vectors", "ogr")
+	TOPSHP2 = TOPSHP[0:len(TOPSHP)-4] + "2.shp"
+	processing.runalg('qgis:fieldcalculator', vlayer, 'area', 0, 10, 2, True, '$area', OUTPATH+TOPSHP2)
+	crownlayer = QgsVectorLayer(OUTPATH+TOPSHP2, "crownArea", "ogr")
 	crownlayer.setCrs(crs)
 	extent = crownlayer.extent()
 	xmin = extent.xMinimum()
@@ -103,11 +118,44 @@ def doTop(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", HEIGHT = "35", COPA 
 	3. define a projecao da camada de poligonos
 	4. carrega a camada no canvas qgis
 	'''
+	'''
 	CROWN = "area > "+COPA
-	processing.runalg("grass7:v.extract", crownlayer, CROWN, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), -1, 0, 0, TOPTREE)
-	treelayer = QgsVectorLayer(TOPTREE, "top tree", "ogr")
+	processing.runalg("grass7:v.extract", crownlayer, CROWN, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), -1, 0, 0, OUTPATH+TOPTREE)
+	treelayer = QgsVectorLayer(TOPTREE, "topTrees", "ogr")
 	treelayer.setCrs(crs)
 	if show:
 		QgsMapLayerRegistry.instance().addMapLayer(treelayer)
+	'''
 	
+	'''
+	1. calcula o centroid de cada poligono extraido como arvore
+	2. salva num shape de pontos chamado centroid.shp
+	3. esctrai as coordenadas x e y de cada ponto
+	4. exporta as coordenadas num csv
+	'''
+	if export:
+		ogr.UseExceptions()
+		os.chdir(OUTPATH)
+		
+		ds = ogr.Open(OUTPATH+TOPSHP2)
+		ly = ds.ExecuteSQL('SELECT ST_Centroid(geometry), * FROM topVec2', dialect='sqlite')
+		drv = ogr.GetDriverByName('Esri shapefile')
+		ds2 = drv.CreateDataSource('centroid.shp')
+		ds2.CopyLayer(ly, '')
+		ly = treelayer = ds2 = None  # save, close
+		
+		pointslayer = QgsVectorLayer(OUTPATH+'centroid.shp', "treepoints", "ogr")
+		pointslayer.setCrs(crs)
+		processing.runalg('qgis:fieldcalculator', pointslayer, 'xcoord', 0, 10, 2, True, '$x', OUTPATH+'centroid2.shp')
+		pointslayer = QgsVectorLayer(OUTPATH+'centroid2.shp', "crownVectors", "ogr")
+		pointslayer.setCrs(crs)
+		processing.runalg('qgis:fieldcalculator', pointslayer, 'ycoord', 0, 10, 2, True, '$y', OUTPATH+'centroid3.shp')
+		pointslayer = QgsVectorLayer(OUTPATH+'centroid3.shp', "crownVectors", "ogr")
+		pointslayer.setCrs(crs)
+		
+		QgsVectorFileWriter.writeAsVectorFormat(pointslayer, OUTPATH+"xy.csv", "utf-8", None, "CSV", layerOptions ='GEOMETRY=AS_WKT')
 	return "Done!"
+	
+'''	
+doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMSK = "topMask.tif",TOPSHP = "topVec.shp",TOPTREE = "topTree.shp", EPSG = 31982)
+'''
