@@ -1,19 +1,16 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\QGIS\\createTop.py')
+execfile('C:\\FUSION\\pcf637\\script\\tree.py')
 '''
 
-def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMSK = "topMask.tif",TOPSHP = "topVec.shp",TOPTREE = "topTree.shp", EPSG = 31982):
+def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "maskCrown.tif", TOPSHP = "crownVec.shp", TOPTREE = "emergentsVec.shp", EPSG = 31982, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\"):
 
 	import processing
 	import os
 	from osgeo import ogr
 	
-	show = True
 	export = True
-	INPATH = "E:\\Users\\USUARIO\\Documents\\GIS DataBase\\Norte\\"
-	OUTPATH = "C:\\QGIS\\"
-	
+		
 	'define projecao a ser usada'
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
 	
@@ -25,8 +22,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	'''
 	chmlayer = QgsRasterLayer(INPATH+CHMASC, "CHM")
 	chmlayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
 	
 	
 	'''
@@ -35,7 +31,8 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	extent = chmlayer.extent()
 	provider = chmlayer.dataProvider()
 	stats = provider.bandStatistics(1, QgsRasterBandStats.All, extent, 0)
-	HEIGHT = str(round(stats.maximumValue - 10))
+	#HEIGHT = str(round(stats.maximumValue - 10))
+	HEIGHT = str(round(stats.mean + 2. * stats.stdDev))
 	
 	'''
 	A partir do CHM importado anteriormente, filtra os pixels acima de uma determianda altura criando
@@ -50,8 +47,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	processing.runalg("saga:rastercalculator", chmlayer, None, CALC1, 3, False, 7, OUTPATH+TOPCROWN)
 	toplayer = QgsRasterLayer(OUTPATH+TOPCROWN, "top crowns")
 	toplayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(toplayer)
+	QgsMapLayerRegistry.instance().addMapLayer(toplayer)
 	
 	'''
 	A partir do CHM importado anteriormente, cria uma mascada para os pixels acima de uma 
@@ -64,16 +60,15 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	6. carrega a mascara no canvas qgis
 	'''
 	CALC2 = "ifelse(a<"+HEIGHT+",-99999,1)"
-	processing.runalg("saga:rastercalculator", chmlayer, None, CALC2, 3, False, 7, OUTPATH+TOPMSK)
-	msklayer = QgsRasterLayer(OUTPATH+TOPMSK, "mascara")
+	processing.runalg("saga:rastercalculator", chmlayer, None, CALC2, 3, False, 7, OUTPATH+TOPMASK)
+	msklayer = QgsRasterLayer(OUTPATH+TOPMASK, "mascara")
 	msklayer.setCrs(crs)
 	extent = msklayer.extent()
 	xmin = extent.xMinimum()
 	xmax = extent.xMaximum()
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(msklayer)
+	QgsMapLayerRegistry.instance().addMapLayer(msklayer)
 	
 	'''
 	A partir mascara de copas emergentes cria uma camada vetorial de poligonos.
@@ -85,8 +80,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	processing.runalg("grass7:r.to.vect", msklayer, 2, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+TOPSHP)
 	vlayer = QgsVectorLayer(OUTPATH+TOPSHP, "crownVectors", "ogr")
 	vlayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(vlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(vlayer)
 	
 	'''
 	A partir camada vetorial de poligonos, cria uma nova camada contendo o atributo de area. Esta camada
@@ -107,8 +101,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	xmax = extent.xMaximum()
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(crownlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(crownlayer)
 	
 	'''
 	A partir do vetor de copas, com as informacoes de area, filtro apenas as copas maiores que area 
@@ -119,7 +112,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 	4. carrega a camada no canvas qgis
 	'''
 	'''
-	CROWN = "area > "+COPA
+	CROWN = "area > "+str(COPA)
 	processing.runalg("grass7:v.extract", crownlayer, CROWN, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), -1, 0, 0, OUTPATH+TOPTREE)
 	treelayer = QgsVectorLayer(TOPTREE, "topTrees", "ogr")
 	treelayer.setCrs(crs)
@@ -138,7 +131,7 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 		os.chdir(OUTPATH)
 		
 		ds = ogr.Open(OUTPATH+TOPSHP2)
-		ly = ds.ExecuteSQL('SELECT ST_Centroid(geometry), * FROM topVec2', dialect='sqlite')
+		ly = ds.ExecuteSQL('SELECT ST_Centroid(geometry), * FROM crownVec2', dialect='sqlite')
 		drv = ogr.GetDriverByName('Esri shapefile')
 		ds2 = drv.CreateDataSource('centroid.shp')
 		ds2.CopyLayer(ly, '')
@@ -147,15 +140,15 @@ def doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMS
 		pointslayer = QgsVectorLayer(OUTPATH+'centroid.shp', "treepoints", "ogr")
 		pointslayer.setCrs(crs)
 		processing.runalg('qgis:fieldcalculator', pointslayer, 'xcoord', 0, 10, 2, True, '$x', OUTPATH+'centroid2.shp')
-		pointslayer = QgsVectorLayer(OUTPATH+'centroid2.shp', "crownVectors", "ogr")
+		pointslayer = QgsVectorLayer(OUTPATH+'centroid2.shp', "treepoints", "ogr")
 		pointslayer.setCrs(crs)
 		processing.runalg('qgis:fieldcalculator', pointslayer, 'ycoord', 0, 10, 2, True, '$y', OUTPATH+'centroid3.shp')
-		pointslayer = QgsVectorLayer(OUTPATH+'centroid3.shp', "crownVectors", "ogr")
+		pointslayer = QgsVectorLayer(OUTPATH+'centroid3.shp', "treepoints", "ogr")
 		pointslayer.setCrs(crs)
 		
 		QgsVectorFileWriter.writeAsVectorFormat(pointslayer, OUTPATH+"xy.csv", "utf-8", None, "CSV", layerOptions ='GEOMETRY=AS_WKT')
 	return "Done!"
-	
+
 '''	
-doTop(CHMASC = "inpe128.tif", COPA = "9", TOPCROWN = "topCrowns.tif",  TOPMSK = "topMask.tif",TOPSHP = "topVec.shp",TOPTREE = "topTree.shp", EPSG = 31982)
+doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "maskCrown.tif", TOPSHP = "crownVec.shp", TOPTREE = "emergentsVec.shp", EPSG = 31982, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\")
 '''
