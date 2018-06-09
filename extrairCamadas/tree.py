@@ -3,13 +3,11 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\pcf637\\script\\tree.py')
 '''
 
-def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "maskCrown.tif", TOPSHP = "crownVec.shp", TOPTREE = "emergentsVec.shp", EPSG = 31982, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\"):
+def tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", TOPCROWN = "crown.shp", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\"):
 
 	import processing
 	import os
 	from osgeo import ogr
-	
-	export = True
 		
 	'define projecao a ser usada'
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
@@ -23,11 +21,12 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	chmlayer = QgsRasterLayer(INPATH+CHMASC, "CHM")
 	chmlayer.setCrs(crs)
 	QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
-	
+	print "Canopy height model loaded."
 	
 	'''
 	Extrair valor maximo da camada CHM e utilizar como referencia para o parametro HEIGHT
 	'''
+	print "Computing reference height."
 	extent = chmlayer.extent()
 	provider = chmlayer.dataProvider()
 	stats = provider.bandStatistics(1, QgsRasterBandStats.All, extent, 0)
@@ -42,12 +41,12 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	3. importa o MDCE para uma variavel
 	4. define a projecao da camada MDCE
 	5. carrega a camada no canvas qgis
-	'''
 	CALC1 = "ifelse(a<"+HEIGHT+",-99999,a)"
 	processing.runalg("saga:rastercalculator", chmlayer, None, CALC1, 3, False, 7, OUTPATH+TOPCROWN)
 	toplayer = QgsRasterLayer(OUTPATH+TOPCROWN, "top crowns")
 	toplayer.setCrs(crs)
 	QgsMapLayerRegistry.instance().addMapLayer(toplayer)
+	'''
 	
 	'''
 	A partir do CHM importado anteriormente, cria uma mascada para os pixels acima de uma 
@@ -59,6 +58,7 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	5. extrai a extensao da mascara
 	6. carrega a mascara no canvas qgis
 	'''
+	print "Creating mask of emergent crown"
 	CALC2 = "ifelse(a<"+HEIGHT+",-99999,1)"
 	processing.runalg("saga:rastercalculator", chmlayer, None, CALC2, 3, False, 7, OUTPATH+TOPMASK)
 	msklayer = QgsRasterLayer(OUTPATH+TOPMASK, "mascara")
@@ -77,8 +77,10 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	3. define a projecao da camada de poligonos
 	4. carrega a camada no canvas qgis
 	'''
-	processing.runalg("grass7:r.to.vect", msklayer, 2, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+TOPSHP)
-	vlayer = QgsVectorLayer(OUTPATH+TOPSHP, "crownVectors", "ogr")
+	print "Creating crown layer 1 of 3 steps"
+	TEMP1 = TOPCROWN[0:len(TOPCROWN)-4] + "Temp1.shp"
+	processing.runalg("grass7:r.to.vect", msklayer, 2, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+TEMP1)
+	vlayer = QgsVectorLayer(OUTPATH+TEMP1, "crownTemp1", "ogr")
 	vlayer.setCrs(crs)
 	QgsMapLayerRegistry.instance().addMapLayer(vlayer)
 	
@@ -92,16 +94,17 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	5. extrai a extensao da mascara
 	6. carrega a camada no canvas qgis
 	'''
-	TOPSHP2 = TOPSHP[0:len(TOPSHP)-4] + "2.shp"
-	processing.runalg('qgis:fieldcalculator', vlayer, 'area', 0, 10, 2, True, '$area', OUTPATH+TOPSHP2)
-	crownlayer = QgsVectorLayer(OUTPATH+TOPSHP2, "crownArea", "ogr")
-	crownlayer.setCrs(crs)
-	extent = crownlayer.extent()
+	print "Creating crown layer 2 of 3 steps"
+	TEMP2 = TOPCROWN[0:len(TOPCROWN)-4] + "Temp2.shp"
+	processing.runalg('qgis:fieldcalculator', vlayer, 'area', 0, 10, 2, True, '$area', OUTPATH+TEMP2)
+	vlayer2 = QgsVectorLayer(OUTPATH+TEMP2, "crownTemp2", "ogr")
+	vlayer2.setCrs(crs)
+	extent = vlayer2.extent()
 	xmin = extent.xMinimum()
 	xmax = extent.xMaximum()
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
-	QgsMapLayerRegistry.instance().addMapLayer(crownlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(vlayer2)
 	
 	'''
 	A partir do vetor de copas, com as informacoes de area, filtro apenas as copas maiores que area 
@@ -111,14 +114,22 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	3. define a projecao da camada de poligonos
 	4. carrega a camada no canvas qgis
 	'''
-	'''
-	CROWN = "area > "+str(COPA)
-	processing.runalg("grass7:v.extract", crownlayer, CROWN, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), -1, 0, 0, OUTPATH+TOPTREE)
-	treelayer = QgsVectorLayer(TOPTREE, "topTrees", "ogr")
-	treelayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(treelayer)
-	'''
+	print "Creating crown layer 3 of 3 steps"
+	CROWN = "area>"+str(COPA)
+	processing.runalg("grass7:v.extract", vlayer2, CROWN, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), -1, 0, 0, OUTPATH+TOPCROWN)
+	crownLayer = QgsVectorLayer(OUTPATH+TOPCROWN, "crown", "ogr")
+	crownLayer.setCrs(crs)
+	QgsMapLayerRegistry.instance().addMapLayer(crownLayer)
+	
+	print "Cleaning temporary files."
+	QgsMapLayerRegistry.instance().removeMapLayer(msklayer.id())
+	QgsMapLayerRegistry.instance().removeMapLayer(vlayer.id())
+	QgsMapLayerRegistry.instance().removeMapLayer(vlayer2.id())
+	driver = ogr.GetDriverByName("ESRI Shapefile")
+	if os.path.exists(OUTPATH+TEMP2):
+		 driver.DeleteDataSource(OUTPATH+TEMP2)
+	if os.path.exists(OUTPATH+TEMP1):
+		 driver.DeleteDataSource(OUTPATH+TEMP1)
 	
 	'''
 	1. calcula o centroid de cada poligono extraido como arvore
@@ -129,26 +140,34 @@ def doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "ma
 	if export:
 		ogr.UseExceptions()
 		os.chdir(OUTPATH)
-		
-		ds = ogr.Open(OUTPATH+TOPSHP2)
-		ly = ds.ExecuteSQL('SELECT ST_Centroid(geometry), * FROM crownVec2', dialect='sqlite')
+		print "Extracting crown centroids 1 of 3 steps"
+		ds = ogr.Open(OUTPATH+TOPCROWN)
+		ly = ds.ExecuteSQL('SELECT ST_Centroid(geometry), * FROM crown', dialect='sqlite')
 		drv = ogr.GetDriverByName('Esri shapefile')
-		ds2 = drv.CreateDataSource('centroid.shp')
+		ds2 = drv.CreateDataSource('emergentesTemp1.shp')
 		ds2.CopyLayer(ly, '')
-		ly = treelayer = ds2 = None  # save, close
-		
-		pointslayer = QgsVectorLayer(OUTPATH+'centroid.shp', "treepoints", "ogr")
+		ly = crownLayer = ds2 = None  # save, close
+		pointslayer = QgsVectorLayer(OUTPATH+'emergentesTemp1.shp', "temp1", "ogr")
 		pointslayer.setCrs(crs)
-		processing.runalg('qgis:fieldcalculator', pointslayer, 'xcoord', 0, 10, 2, True, '$x', OUTPATH+'centroid2.shp')
-		pointslayer = QgsVectorLayer(OUTPATH+'centroid2.shp', "treepoints", "ogr")
+		print "Extracting crown centroids 2 of 2 steps"
+		processing.runalg('qgis:fieldcalculator', pointslayer, 'xcoord', 0, 10, 2, True, '$x', OUTPATH+'emergentesTemp2.shp')
+		pointslayer = QgsVectorLayer(OUTPATH+'emergentesTemp2.shp', "temp2", "ogr")
 		pointslayer.setCrs(crs)
-		processing.runalg('qgis:fieldcalculator', pointslayer, 'ycoord', 0, 10, 2, True, '$y', OUTPATH+'centroid3.shp')
-		pointslayer = QgsVectorLayer(OUTPATH+'centroid3.shp', "treepoints", "ogr")
+		print "Extracting crown centroids 3 of 3 steps"
+		processing.runalg('qgis:fieldcalculator', pointslayer, 'ycoord', 0, 10, 2, True, '$y', OUTPATH+'emergentes.shp')
+		pointslayer = QgsVectorLayer(OUTPATH+'emergentes.shp', "emergentes", "ogr")
 		pointslayer.setCrs(crs)
-		
+		QgsMapLayerRegistry.instance().addMapLayer(pointslayer)
+		print "Exporting centroids."
 		QgsVectorFileWriter.writeAsVectorFormat(pointslayer, OUTPATH+"xy.csv", "utf-8", None, "CSV", layerOptions ='GEOMETRY=AS_WKT')
+		
+		print "Cleaning temporary files."
+		driver = ogr.GetDriverByName("ESRI Shapefile")
+		if os.path.exists(OUTPATH+'emergentesTemp1.shp'):
+			 driver.DeleteDataSource(OUTPATH+'emergentesTemp1.shp')
+		if os.path.exists(OUTPATH+'emergentesTemp2.shp'):
+			 driver.DeleteDataSource(OUTPATH+'emergentesTemp2.shp')
+	
 	return "Done!"
-
-'''	
-doTop(CHMASC = "chm.asc", COPA = 9, TOPCROWN = "crownTop.tif", TOPMASK = "maskCrown.tif", TOPSHP = "crownVec.shp", TOPTREE = "emergentsVec.shp", EPSG = 31982, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\")
-'''
+	
+tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", TOPCROWN = "crown.shp", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\")

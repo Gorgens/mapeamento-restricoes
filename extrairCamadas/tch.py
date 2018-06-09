@@ -3,7 +3,7 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\pcf637\\script\\tch.py')
 '''
 
-def doTch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\"):
+def tch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\out\\"):
 	
 	import processing
 
@@ -48,6 +48,5 @@ def doTch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=319
 	
 	return "Done!"
 	
-'''	
-doTch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\")
-'''
+	
+tch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\")
