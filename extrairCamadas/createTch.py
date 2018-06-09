@@ -1,12 +1,11 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\python\\createTch.py')
+execfile('C:\\FUSION\\pcf637\\script\\tch.py')
 '''
 
-def doTch(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", TCHCELL = 50, TCH = "C:\\FUSION\\pcf637\\chm\\upa_1tch.tif", MDVOL = "C:\\FUSION\\pcf637\\chm\\upa_1vol.tif",EPSG = 31982):
+def doTch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\"):
 	
 	import processing
-	show = True
 
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
 
@@ -22,20 +21,18 @@ def doTch(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", TCHCELL = 50, TCH = 
 	7. define a projecao do TCH
 	8. exibe o TCH no canvas do qgis
 	'''
-	chmlayer = QgsRasterLayer(CHMASC, "CHM")
+	chmlayer = QgsRasterLayer(INPATH+CHMASC, "CHM")
 	chmlayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(chmlayer)
 	extent = chmlayer.extent()
 	xmin = extent.xMinimum()
 	xmax = extent.xMaximum()
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
-	processing.runalg('grass7:r.resamp.stats', chmlayer,0,False,False,False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), TCHCELL, TCH)
-	tchlayer = QgsRasterLayer(TCH, "TCH")
+	processing.runalg('grass7:r.resamp.stats', chmlayer, 0, False, False, False, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), TCHCELL, OUTPATH+TCH)
+	tchlayer = QgsRasterLayer(OUTPATH+TCH, "TCH")
 	tchlayer.setCrs(crs)
-	if show:	
-		QgsMapLayerRegistry.instance().addMapLayer(tchlayer)
+	QgsMapLayerRegistry.instance().addMapLayer(tchlayer)
 	
 	'''
 	Cria o mapa de biomassa usando a metodologia proposta por Longo et al.
@@ -44,10 +41,12 @@ def doTch(CHMASC = "C:\\FUSION\\pcf637\\chm\\upa_1chm.asc", TCHCELL = 50, TCH = 
 	3. define a projecao da camada.
 	4. carrega camada no canvas qgis
 	'''
-	processing.runalg("saga:rastercalculator", tchlayer, None, "(0.054*((a)^1.76))*2", 3, False, 7, MDVOL)	
-	vollayer = QgsRasterLayer(MDVOL, "VOL")
+	processing.runalg("saga:rastercalculator", tchlayer, None, "(0.054*((a)^1.76))*2", 3, False, 7, OUTPATH+MDVOL)	
+	vollayer = QgsRasterLayer(OUTPATH+MDVOL, "MDB")
 	vollayer.setCrs(crs)
-	if show:
-		QgsMapLayerRegistry.instance().addMapLayer(vollayer)
+	QgsMapLayerRegistry.instance().addMapLayer(vollayer)
 	
 	return "Done!"
+	
+	
+doTch(CHMASC="chm.asc", TCHCELL=50, TCH="tch.tif", MDVOL="mdb.tif", EPSG=31982, INPATH="C:\\FUSION\\pcf637\\script\\", OUTPATH="C:\\FUSION\\pcf637\\script\\")
