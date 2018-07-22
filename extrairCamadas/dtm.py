@@ -1,9 +1,9 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\python\\createDtm.py')
+execfile('C:\\FUSION\\pcf637\\python\\dtm.py')
 '''
 
-def doDtm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", FILTERCELL = "8", GNDLAS = "C:\\FUSION\\pcf637\\mdt\\upa_1gnd.laz", DTMCELL = "1", ASCDTM = "C:\\FUSION\\pcf637\\mdt\\upa_1.asc", EPSG = 31982):
+def dtm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", FILTERCELL = "8", GNDLAS = "C:\\FUSION\\pcf637\\mdt\\upa_1gnd.laz", DTMCELL = "1", ASCDTM = "C:\\FUSION\\pcf637\\mdt\\upa_1.asc", EPSG = 31982):
 	
 	import subprocess
 	show = True
