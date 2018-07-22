@@ -1,9 +1,9 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\python\\createChm.py')
+execfile('C:\\FUSION\\pcf637\\python\\chm.py')
 '''
 
-def doChm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", CHM = "C:\\FUSION\\pcf637\\chm\\upa_1chm.dtm", CHMCELL = "1", EPSG = 31982):
+def chm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", CHM = "C:\\FUSION\\pcf637\\chm\\upa_1chm.dtm", CHMCELL = "1", EPSG = 31982):
 	
 	import subprocess
 	show = True
