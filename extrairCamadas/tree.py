@@ -1,13 +1,14 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\script\\tree.py')
+execfile('C:\\FUSION\\daad\\tree.py')
 '''
 
-def tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", TOPCROWN = "crown.shp", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\"):
+def tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\"):
 
 	import processing
 	import os
 	from osgeo import ogr
+	TOPCROWN = "crown.shp"
 		
 	'define projecao a ser usada'
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
@@ -170,4 +171,4 @@ def tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", TOPCROWN = "cr
 	
 	return "Done!"
 	
-tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", TOPCROWN = "crown.shp", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\")
+tree(CHMASC = "chm.asc", COPA = 9, TOPMASK = "crownMask.tif", EPSG = 31982, export = True, INPATH = "C:\\FUSION\\pcf637\\script\\", OUTPATH = "C:\\FUSION\\pcf637\\script\\out\\")
