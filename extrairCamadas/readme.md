@@ -9,6 +9,7 @@
 1. DTM
   - dtm.py
   - slope.py
+  - drainage.py
 2. CHM
   - chm.py
   - tch.py
