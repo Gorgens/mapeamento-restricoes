@@ -8,6 +8,7 @@
 ## As camadas de informações são baseadas nas seguintes duperfícies:
 1. DTM
   - dtm.py
+  - slope.py
 2. CHM
   - chm.py
   - tch.py
