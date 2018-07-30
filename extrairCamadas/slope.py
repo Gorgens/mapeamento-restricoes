@@ -3,19 +3,17 @@ TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\daad\\slope.py')
 '''
 
-def slope(ASCDTM = "C:\\FUSION\\daad\\upa6dtm.asc", SLOPE = "C:\\FUSION\\daad\\upa6slope.tif", RULESKIDDER = "C:\\FUSION\\daad\\ruleSkidder.txt", SKIDDEREST = "C:\\FUSION\\daad\\upa6restSkidder.tif", RULETRUCK = "C:\\FUSION\\daad\\ruleTruck.txt", TRUCKREST = "C:\\FUSION\\daad\\upa6restTruck.tif", EPSG = 31982):
+def slope(ASCDTM = "upa6dtm.asc", SLOPE = "upa6slope.tif", RULESKIDDER = "ruleSkidder.txt", SKIDDEREST = "upa6SkidderCost.tif", RULETRUCK = "ruleTruck.txt", TRUCKREST = "upa6TruckCost.tif", INPATH = "C:\\FUSION\\daad\\", OUTPATH = "C:\\FUSION\\daad\\", EPSG = 31982):
 	
 	import subprocess
 	import os
 	from osgeo import ogr
 	
-	show = True
-	
 	'define projecao a ser usada'
 	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
 
-	'carrega modelo digital de terreno'
-	dtmlayer = QgsRasterLayer(ASCDTM, "mdt")
+	print "Loading digital terrain model."
+	dtmlayer = QgsRasterLayer(INPATH+ASCDTM, "mdt")
 	dtmlayer.setCrs(crs)
 	QgsMapLayerRegistry.instance().addMapLayer(dtmlayer)
 	extent = dtmlayer.extent()
@@ -24,22 +22,28 @@ def slope(ASCDTM = "C:\\FUSION\\daad\\upa6dtm.asc", SLOPE = "C:\\FUSION\\daad\\u
 	ymin = extent.yMinimum()
 	ymax = extent.yMaximum()
 	
-	processing.runalg("grass7:r.slope", dtmlayer, 0, False, 1, 0, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, SLOPE)
-	slopelayer = QgsRasterLayer(SLOPE, "slope")
+	print "Computing slope."
+	processing.runalg("grass7:r.slope", dtmlayer, 0, False, 1, 0, "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+SLOPE)
+	slopelayer = QgsRasterLayer(OUTPATH+SLOPE, "slope")
 	slopelayer.setCrs(crs)
 	QgsMapLayerRegistry.instance().addMapLayer(slopelayer)
 	
 	if RULESKIDDER != None:
-		processing.runalg("grass7:r.reclass", slopelayer, RULESKIDDER, "", "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, SKIDDEREST)
-		skidderlayer = QgsRasterLayer(SKIDDEREST, "skidder")
+		print "Computing skidder surface cost."
+		processing.runalg("grass7:r.reclass", slopelayer, INPATH+RULESKIDDER, "", "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+SKIDDEREST)
+		skidderlayer = QgsRasterLayer(OUTPATH+SKIDDEREST, "skidder cost")
 		skidderlayer.setCrs(crs)
 		QgsMapLayerRegistry.instance().addMapLayer(skidderlayer)
 	
 	if RULETRUCK != None:	
-		processing.runalg("grass7:r.reclass", slopelayer, RULETRUCK, "", "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, TRUCKREST)
-		trucklayer = QgsRasterLayer(TRUCKREST, "truck")
+		print "Computing load truck surface cost."
+		processing.runalg("grass7:r.reclass", slopelayer, INPATH+RULETRUCK, "", "%f,%f,%f,%f"% (xmin, xmax, ymin, ymax), 0, OUTPATH+TRUCKREST)
+		trucklayer = QgsRasterLayer(OUTPATH+TRUCKREST, "truck cost")
 		trucklayer.setCrs(crs)
 		QgsMapLayerRegistry.instance().addMapLayer(trucklayer)
 
+	print "Cleaning QGIS canvas."
+	QgsMapLayerRegistry.instance().removeMapLayer(dtmlayer.id())
+	QgsMapLayerRegistry.instance().removeMapLayer(slopelayer.id())
 	
 	return "Done!"
