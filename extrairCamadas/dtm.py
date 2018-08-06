@@ -1,10 +1,14 @@
 '''
 TO CALL ON PYTHON SHELL
 execfile('C:\\FUSION\\daad\\dtm.py')
+
+Adicionar:
+- 
 '''
 
-def dtm(INLAS =  "upa6.laz", DTM  = "upa6dtm.dtm", FILTERCELL = "8", GNDLAS = "upa6gnd.laz", DTMCELL = "1", ASCDTM = "upa6dtm.asc", INPATH = "C:\\FUSION\\daad\\", OUTPATH = "C:\\FUSION\\daad\\", EPSG = 31982):
+def dtm(INLAS =  "upa6.laz", DTM  = "upa6dtm.dtm", FILTERCELL = "8", GNDLAS = "upa6gnd.laz", DTMCELL = "1", ASCDTM = "upa6dtm.asc", INPATH = "C:\\FUSION\\daad\\", OUTPATH = "C:\\FUSION\\daad\\", EPSG = 31982, OPEN = True):
 	
+	import processing
 	import subprocess
 	
 	GNDFUN = "c:\\fusion\\groundfilter"
@@ -35,10 +39,11 @@ def dtm(INLAS =  "upa6.laz", DTM  = "upa6dtm.dtm", FILTERCELL = "8", GNDLAS = "u
 		print "Check the code, and try again."
 		return
 	
-	print "Loading raster to canvas."
-	crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
-	rlayer = QgsRasterLayer(OUTPATH+ASCDTM, "DTM")
-	rlayer.setCrs(crs)
-	QgsMapLayerRegistry.instance().addMapLayer(rlayer)
+	if OPEN == True:
+		print "Loading raster to canvas."
+		crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
+		rlayer = QgsRasterLayer(OUTPATH+ASCDTM, "DTM")
+		rlayer.setCrs(crs)
+		QgsMapLayerRegistry.instance().addMapLayer(rlayer)
 	
 	return "Done!"
