@@ -1,12 +1,11 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\daad\\dtm.py')
-
+execfile('C:\\FUSION\\zf2\\julia\\lidar\\dtm.py')
 Adicionar:
 - 
 '''
 
-def dtm(INLAS =  "upa6.laz", DTM  = "upa6dtm.dtm", FILTERCELL = "8", GNDLAS = "upa6gnd.laz", DTMCELL = "1", ASCDTM = "upa6dtm.asc", INPATH = "C:\\FUSION\\daad\\", OUTPATH = "C:\\FUSION\\daad\\", EPSG = 31982, OPEN = True):
+def dtm(INLAS =  "NP_T-400.las", DTM  = "NP_T-400dtm.dtm", FILTERCELL = "8", GNDLAS = "NP_T-400gnd.laz", DTMCELL = "1", ASCDTM = "NP_T-400.asc", INPATH = "C:\\FUSION\\las\\", OUTPATH = "C:\\FUSION\\zf2\\julia\\lidar\\", EPSG = 31980, OPEN = True):
 	
 	import processing
 	import subprocess
@@ -39,7 +38,7 @@ def dtm(INLAS =  "upa6.laz", DTM  = "upa6dtm.dtm", FILTERCELL = "8", GNDLAS = "u
 		print "Check the code, and try again."
 		return
 	
-	if OPEN == True:
+	if OPEN:
 		print "Loading raster to canvas."
 		crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
 		rlayer = QgsRasterLayer(OUTPATH+ASCDTM, "DTM")

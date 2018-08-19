@@ -1,26 +1,28 @@
 '''
 TO CALL ON PYTHON SHELL
-execfile('C:\\FUSION\\pcf637\\python\\chm.py')
+execfile('C:\\FUSION\\zf2\\julia\\lidar\\chm.py')
 '''
 
-def chm(INLAS =  "C:\\FUSION\\pcf637\\las\\upa_1.laz", DTM  = "C:\\FUSION\\pcf637\\mdt\\upa_1.dtm", CHM = "C:\\FUSION\\pcf637\\chm\\upa_1chm.dtm", CHMCELL = "1", EPSG = 31982):
+def chm(INLAS =  "NP_T-400.las", DTM  = "NP_T-400dtm.dtm", CHM = "NP_T-400chm.dtm", LASPATH = "C:\\FUSION\\las\\", DTMPATH = "C:\\FUSION\\zf2\\julia\\lidar\\", OUTPATH = "C:\\FUSION\\zf2\\julia\\lidar\\", CHMCELL = "1", EPSG = 31982, OPEN = True):
 	
+	import processing
 	import subprocess
-	show = True
 	
-	GND = "/ground:" + DTM
+	GND = "/ground:" + DTMPATH + DTM
 	ASC = "/ascii"
 	CHMFUN = "c:\\fusion\\canopymodel"
-	CHMASC = CHM[0:len(CHM)-4] + ".asc"
-		
-	ch=subprocess.call([CHMFUN, GND, ASC, CHM, CHMCELL, "m", "m",  "1",  "22",  "0",  "0", INLAS], shell=True)
+	CHMASC = OUTPATH+CHM[0:len(CHM)-4] + ".asc"
+	
+	print 'Creating CHM...'
+	ch=subprocess.call([CHMFUN, GND, ASC, OUTPATH+CHM, CHMCELL, "m", "m",  "1",  "22",  "0",  "0", LASPATH+INLAS], shell=True)
 	if ch == 0:
 		print "CHM created!"
 	else:
 		print "Check the code, and try again."
 		return
 	
-	if show:
+	if OPEN:
+		print "Loading raster to canvas."
 		crs = QgsCoordinateReferenceSystem(EPSG, QgsCoordinateReferenceSystem.PostgisCrsId)
 		rlayer = QgsRasterLayer(CHMASC, "CHM")
 		rlayer.setCrs(crs)
