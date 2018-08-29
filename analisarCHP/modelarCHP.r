@@ -14,7 +14,7 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
   ## Para PLOT 1 -----------
   #plot.las = as.data.frame(readLAS("c:/grassdata/subbosque_cenibra/plots/jan_plot1.las"))
   plot.las = readLAS(PLOT)
-  plot.las = plot.las$data
+  plot.las = plot.las@data
   
   # Adjust negative values as ground
   plot.las[plot.las$Z <= 0.01,'Z'] = 0.01
