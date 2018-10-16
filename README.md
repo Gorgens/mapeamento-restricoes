@@ -1,19 +1,20 @@
-Mapeamento de restrições operacionais, das restrições ambientais e do potencial madeireiro numa área de floresta amazônica por meio do escaneamento laser aerotransportado
+Manejo de Precisão em Florestas Nativas
 =====
 
 # Informações do projeto
-Coordenador: Eric Bastos Gorgens
 
-Processo: 403297/2016-8
+Iniciado em 2017. Status: Em andamento.
 
-Vigência: 01/06/2017 a 31/05/2020
+Esta linha de pesquisa já foi conteplada com:
+
+Projeto aprovado na Chamada CNPq Universal 2016. Faixa A. Número: 403297/2016-8. Título: Mapeamento de restrições operacionais, das restrições ambientais e do potencial madeireiro numa área de floresta amazônica por meio do escaneamento laser aerotransportado. Valor: ~R$ 30.000,00.
+
+Projeto aprovado em Chamada PIBIC UFVJM 2017. Determinação do tempo de passagem em diferentes áreas de floresta Amazônica. Valor: ~R$ 4.800,00.
+
+Projeto aprovado em Chamada PIBIC UFVJM 2016. Controle estatístico de processo a partir de dados coletados por dispositivo de registro autônomo de atividades florestais. Valor: ~R$ 4.800,00.
+
+Projeto aprovado em Chamada DAAD Research Stays for University Academics and Scientists 2018. Number: 57381327.
 
 # Objetivos e metas
 
-O objetivo principal deste projeto é propor um manejo de precisão a partir de informações obtidas por meio de levantamento laser aerotransportado que permita subsidiar a tomada de decisão relativas ao manejo florestal na Amazônia brasileira. Dentre os objetivos secundários destacam-se: 
-
-- propor e validar parâmetros para criação do modelo digital de terreno para floresta tropical, para determinação da rede de drenagem e delimitação das área com limitações ambientais e operacionais relativas ao terreno, 
-- mapear o potencial produtivo das unidades de manejo, 
-- identificar e localizar árvores de interesse para o manejo florestal,
-- propor um roteiro técnico para a utilização da tecnologia ALS no manejo florestal e 
-- incentivar a mobilidade e troca de conhecimento entre instituições nacionais e internacionais.
+O manejo florestal de precisão tem por objetivo realizar atividades site específicas para reduzir desperdícios, aumentar o retorno e manter a qualidade do meio ambiente. As técnicas de precisão são centradas na tecnologia geoespaciais, no sensoriamento remoto e na inteligência artificial para tomada de decisão.
