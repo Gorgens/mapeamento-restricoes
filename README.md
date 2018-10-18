@@ -11,8 +11,8 @@ Projeto aprovado na Chamada CNPq Universal 2016. Faixa A. Número: 403297/2016-8
 
 Projeto aprovado em Chamada PIBIC UFVJM 2016. Controle estatístico de processo a partir de dados coletados por dispositivo de registro autônomo de atividades florestais. Valor: ~R$ 4.800,00.
 
-Projeto aprovado em Chamada DAAD Research Stays for University Academics and Scientists 2018. Number: 57381327.
+Projeto aprovado em Chamada DAAD Research Stays for University Academics and Scientists 2018. Number: 57381327. Valor: ~EU$ 3.500,00.
 
 # Objetivos e metas
 
-O manejo florestal de precisão tem por objetivo realizar atividades site específicas para reduzir desperdícios, aumentar o retorno e manter a qualidade do meio ambiente. As técnicas de precisão são centradas na tecnologia geoespaciais, no sensoriamento remoto e na inteligência artificial para tomada de decisão.
+O manejo florestal de precisão tem por objetivo realizar atividades site específicas para reduzir desperdícios, aumentar o retorno e manter a qualidade do meio ambiente. As técnicas de precisão são centradas nas tecnologias geoespaciais, no sensoriamento remoto e na inteligência artificial para tomada de decisão.
