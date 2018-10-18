@@ -1,5 +1,8 @@
 # Modelo de rota mínima para transporte madeireiro
-# 
+# Software: ARCGIS
+# Linguagem: python
+# Autor: Rauff Barbosa
+# Supervisor: Eric Gorgens
 #-----------------------------------------------------------------------------------------
  
 #Importar módulo arcpy

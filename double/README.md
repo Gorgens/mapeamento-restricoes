@@ -1,13 +1,14 @@
 # Redução do erro amostral na estimativa do volume de povoamentos de Eucalyptus ssp. por meio de escaneamento laser aerotransportado
 
-Scientia Forestalis, volume 43, n. 108. p.845-852, dezembro de 2015. Publicando em: http://www.ipef.br/publicacoes/scientia/leitura_impressao.asp?Article=09&Number=108
+## Sobre
 
-## Autores
-Danitiele Cristina França Laranja
-Eric Bastos Gorgens
-Carlos Pedro Boechat Soares
-André Gracioso Peres da Silva
-Luiz Carlos Estraviz Rodriguez
+Danitiele Cristina França Laranja, Eric Bastos Gorgens, Carlos Pedro Boechat Soares, André Gracioso Peres da Silva, Luiz Carlos Estraviz Rodriguez
+
+Revista Scientia Forestalis.
+
+Publicando em 2015
+
+Link: http://www.ipef.br/publicacoes/scientia/leitura_impressao.asp?Article=09&Number=108
 
 ## Resumo
 

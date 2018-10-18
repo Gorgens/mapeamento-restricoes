@@ -3,13 +3,11 @@ Manejo de Precisão em Florestas Nativas
 
 # Informações do projeto
 
-Iniciado em 2017. Status: Em andamento.
+Iniciado em 2016. Status: Em andamento.
 
 Esta linha de pesquisa já foi conteplada com:
 
 Projeto aprovado na Chamada CNPq Universal 2016. Faixa A. Número: 403297/2016-8. Título: Mapeamento de restrições operacionais, das restrições ambientais e do potencial madeireiro numa área de floresta amazônica por meio do escaneamento laser aerotransportado. Valor: ~R$ 30.000,00.
-
-Projeto aprovado em Chamada PIBIC UFVJM 2017. Determinação do tempo de passagem em diferentes áreas de floresta Amazônica. Valor: ~R$ 4.800,00.
 
 Projeto aprovado em Chamada PIBIC UFVJM 2016. Controle estatístico de processo a partir de dados coletados por dispositivo de registro autônomo de atividades florestais. Valor: ~R$ 4.800,00.
 

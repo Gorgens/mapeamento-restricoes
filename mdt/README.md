@@ -1,16 +1,10 @@
 # Comparação de  dois métodos de criação de Modelo Digital de Terreno em uma área da floresta amazônica
 
+## Sobre 
+
 Resumo apresentado no VI SINTEGRA - 2018
 
-Área: Agricultura
-
-Subárea: Recursos Florestais e Engenharia Florestal
-
 Autores: Silva BHL*, Andrade MSS, Reis CR, Gorgens EB.
-
-## Resumo de apresentação  
-
-O presente estudo teve como objetivo comparar dois métodos de criação de Modelo Digital de Terreno (MDT). Um método foi baseado na filtragem dos retornos que interceptaram o terreno, e outro método baseado nos valores mínimos. Na interpretação dos resultados foi encontrado o desvio padrão de 7,73 metros e o erro médio de 0,70 metros. A diferença entre produtos foi submétrica.
 
 ## Resumo 
 
@@ -19,3 +13,43 @@ O presente estudo teve como objetivo comparar dois métodos de criação de Mode
 ## Apoio financeiro
 
 Paisagens sustentáveis (EMBRAPA,USDA - FS). Chamada Universal CNPq - Processo: 403297/2016-8. CAPES, FAPEMIG  e UFVJM.
+
+# MODELAGEM DIGITAL DE TERRENO EM ÁREAS DE FLORESTA OMBRÓFILA
+
+## Sobre
+
+Autor: Mariana Silva Andrade
+
+Orientador: Eric Gorgens
+
+Apresentado em 2017
+
+Graduação em Engenharia Florestal
+
+Universidade Federal dos Vales do Jequitinhonha e Mucuri
+
+## Resumo
+
+O primeiro passo em grande parte das análises baseadas em levantamentos laser (ALS) é a criação do modelo digital de terreno (MDT). Os erros relacionados à criação do modelo digital de terrenos estão geralmente relacionados à erros de classificação, durante a separação dos retornos entre terrenos e não terreno. Um das formas de minimizar é aumentando a densidade de pulsos, visando aumentar a probabilidade de se atingir o solo efetivamente. No entanto, o aumento da densidade de pulsos também implica no aumento do custo associado ao levantamento laser. Dessa forma, o objetivo deste estudo é qual a redução na densidade de pulsos que não compromete a qualidade do modelo digital de terreno. Os dados foram coletados em três áreas de floresta tropical: fazenda Cauaxi, no estado do Pará e em duas áreas na floresta nacional do Jamari, no estado de Rondônia. As nuvens de pontos foram processadas utilizando três algoritmos desenvolvidos por Kraus e Pfeifer, Hudak e Evans e Axelsson. Os modelos digitais gerados a partir de diferentes densidade de pulsos foram comparados pelo erro padrão da estimativa (RMSE) com os respectivos modelos digitais de terreno gerados a partir da nuvem original. Como resultado observa-se que o algoritmo de Kraus e Pfeifer apresentou o melhor desempenho em relação aos demais, seguido do algoritmo proposto por Axelsson. Foi possível reduzir a densidade até 4 pulsos/m² mantendo uma resolução de 1 metro sem perda na qualidade do MDT.
+
+## Abstract
+
+The first step in most analyzes based on airborne laser scanning (ALS) is the creation of the digital terrain model (DTM). The errors related to the DTM creation are generally related to misclassification of ground points. One alternative to minimize those errors is to increase the density of pulses, in order to increase the probability of reaching effectively the ground. However, increasing the pulse density also implies in the increase of the cost associated with the laser survey. The purpose of this study is to reduce the pulse density that does not compromise the quality of the digital terrain model. The data sets were collected in three tropical forest areas: Cauaxi farm, in the state of Pará, and in the Jamari National Forest (two flights), in the state of Rondônia. The point clouds were processed using three algorithms developed by Kraus and Pfeifer, Hudak and Evans and Axelsson. The digital models generated from different pulse densities were compared by root mean square error (RMSE) with the respective digital terrain models generated from the original cloud. As a result, the algorithm of Kraus and Pfeifer presented the best performance, followed by the algorithm proposed by Axelsson. It was possible to reduce the density up to 4 pulses / m² maintaining a resolution of 1 meter without loss in the DTM quality.
+
+# INFLUÊNCIA DA DENSIDADE DE PULSOS NA MODELAGEM DIGITAL DE TERRENO EM FLORESTA OMBRÓFILA
+
+## Sobre
+
+Autor: Mariana Silva Andrade
+
+Orientador: Eric Gorgens
+
+Apresentado em 2017.
+
+Iniciação Científica UFVJM, CNPq, FAPEMIG.
+
+Universidade Federal dos Vales do Jequitinhonha e Mucuri.
+
+## Resumo
+
+O primeiro passo em grande parte das análises baseadas em levantamentos laser (ALS) é a criação do modelo digital de terreno (MDT). Os erros relacionados à criação do modelo digital de terrenos estão geralmente relacionados à erros de classificação, durante a separação dos retornos entre terrenos e não terreno. Uma das formas de minimizar é aumentando a densidade de pulsos, visando aumentar a probabilidade de se atingir o solo efetivamente. No entanto, o aumento da densidade de pulsos também implica no aumento do custo associado ao levantamento laser. Dessa forma, o objetivo deste estudo é qual a redução na densidade de pulsos que não compromete a qualidade do modelo digital de terreno. Os dados foram coletados em três áreas de floresta tropical: fazenda Cauaxi, no estado do Pará e em duas áreas na floresta nacional do Jamari, no estado de Rondônia. As nuvens de pontos foram processadas utilizando três algoritmos desenvolvidos por Kraus e Pfeifer, Hudak e Evans e Axelsson. Os modelos digitais gerados a partir de diferentes densidadse de pulsos foram comparados pelo erro padrão da estimativa (RMSE) com os respectivos modelos digitais de terreno gerados a partir da nuvem original. Como resultado observa-se que o algoritmo de Kraus e Pfeifer apresentou o melhor desempenho em relação aos demais, seguido do algoritmo proposto por Axelsson. Foi possível reduzir a densidade até 4 pulsos/m² mantendo uma resolução de 1 metro sem perda na qualidade do MDT.
