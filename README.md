@@ -21,19 +21,16 @@ O manejo florestal de precisão tem por objetivo realizar atividades site espec�
 
 # Sub-projetos
 
-Os projetos estão organizados na seguinte estrutura de pastas
-_
-|
-|---<a name="chp"></a>
-|
-|---double
-|
-|---layers
-|
-|---mdt
-|
-|---mdt
-|
-|---routes
+Os sub-projetos estão organizados na seguinte estrutura de pastas
 
-[CHP project](#chp)
+[chp](#chp)
+
+double
+
+layers
+
+mdt
+
+routes
+
+## CHP
