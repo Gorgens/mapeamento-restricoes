@@ -117,7 +117,56 @@ print "Done 6 of 7."
 execfile('C:\\FUSION\\daad\\coding\\opt.py')
 if STEP7:
 
-	#opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC1.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC1.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
 	
 	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC2.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC3.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC4.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC5.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC6.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC7.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC8.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC9.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC10.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC11.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC12.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC13.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC14.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC15.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC16.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC17.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC18.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC19.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC20.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC21.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC22.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC23.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC24.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC25.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
+	opt(ELEVATION = "upa3_dtm.asc", SURFACECOST = "SC26.tif", START = "start.shp", TREES = "emergentes2.shp", INPATH = "C:\\FUSION\\daad\\upa3\\", OUTPATH = "C:\\FUSION\\daad\\upa3\\", EPSG = 31982, OPEN = True)
+	
 print "Done 7 of 7. Ready!"

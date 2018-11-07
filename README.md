@@ -18,3 +18,22 @@ Esta linha de pesquisa já foi conteplada com:
 # Objetivos e metas
 
 O manejo florestal de precisão tem por objetivo realizar atividades site específicas para reduzir desperdícios, aumentar o retorno e manter a qualidade do meio ambiente. As técnicas de precisão são centradas nas tecnologias geoespaciais, no sensoriamento remoto e na inteligência artificial para tomada de decisão.
+
+# Sub-projetos
+
+Os projetos estão organizados na seguinte estrutura de pastas
+_
+|
+|---<a name="chp"></a>
+|
+|---double
+|
+|---layers
+|
+|---mdt
+|
+|---mdt
+|
+|---routes
+
+[CHP project](#chp)
