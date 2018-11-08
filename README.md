@@ -24,7 +24,7 @@ O manejo florestal de precisão tem por objetivo realizar atividades site espec�
 Os sub-projetos estão organizados na seguinte estrutura de pastas
 
 - [chp](#chp)
-- <a href=gorgens.github.io/precisionFor/chp>chp</a>
+- <a href=https://gorgens.github.io/precisionFor/chp>chp</a>
 - [double](#double)
 - [layers](#layers)
 - [mdt](#mdt)
