@@ -1,7 +1,7 @@
-CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, norm = TRUE){
+CHPmodel = function(input, output, hbreak = 0.5, hground = 0.25, estrato = 2, norm = TRUE){
   
   # Variaveis do ambiente
-  PLOT = x
+  PLOT = input
 
   # Ativando pacotes
   #require(rgl)
@@ -10,16 +10,16 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
   require(gridExtra)
   require(lidR)
   require(MASS)
+  require(jpeg)
   
   ## Para PLOT 1 -----------
-  #plot.las = as.data.frame(readLAS("c:/grassdata/subbosque_cenibra/plots/jan_plot1.las"))
   plot.las = readLAS(PLOT)
   plot.las = plot.las@data
   
   # Adjust negative values as ground
   plot.las[plot.las$Z <= 0.01,'Z'] = 0.01
   
-  if(hmin == 0){hmin=0.01}
+  hmin=0.01
   
   if (isTRUE(norm)){
     plot.las$Znorm = plot.las$Z / max(plot.las$Z)
@@ -36,25 +36,11 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
     step = 0.01 * gmax
   }
   
-  # Prepara grafico 3D
-  # open3d(windowRect=c(100,100,800,800))
-  # plot3d(plot.las$X, plot.las$Y, plot.las$Z, 
-  #        col = "darkgreen", 
-  #        alpha = 1/10,
-  #        xlab = "X coord. (m)",
-  #        ylab = "Y coord. (m)",
-  #        zlab = "Elevation (m)",
-  #        axes = FALSE)
-  # axes3d(edges=c("x--", "y--", "z-+"))
-  #rgl.postscript("cloud.eps")
-  
   # Grafico 2D
-  #tiff("2b TwoDimention.tif", width = 15, height = 10, units = "cm", res = 600)
-  g1d = ggplot(plot.las, aes(X, Znorm)) + 
+  g1d = ggplot(plot.las, aes(X, Z)) + 
     geom_point(alpha = 1/10, colour = "darkgreen", size = 0.8) +
     #geom_point(colour = "darkgreen", size = 0.8) +
     xlab("X Coordinate") + ylab("Height above ground") +
-    ylim(0, gmax) +
     theme(legend.background = element_blank(), 
           legend.key = element_blank(),
           panel.grid.minor = element_blank(),
@@ -63,10 +49,8 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
           panel.border = element_blank(),
           strip.background = element_blank(),
           plot.background = element_blank())
-  #dev.off()
-  
+
   # Histograma
-  #tiff("2c canopyHist.tif", width = 8, height = 10, units = "cm", res = 600)
   g1hist = ggplot(plot.las, aes(Znorm)) +
     geom_histogram(binwidth = bin, fill = "black") + coord_flip() +
     xlab("Height above ground") + ylab("Frequency") +
@@ -78,8 +62,7 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
           panel.border = element_blank(),
           strip.background = element_blank(),
           plot.background = element_blank())
-  #dev.off()
-  
+
   if (estrato == 3){
     # Weibull para copa
     copa <- plot.las[plot.las$Znorm>hbreak,]
@@ -113,10 +96,11 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
             strip.background = element_blank(),
             plot.background = element_blank()) +
       coord_flip()
-    output = list(gmax, fit.gnd, fit.sub, fit.copa, g1d, g1hist, w1g)
-    graph = grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
-    print(graph)
-    return(output)
+    outlist = list(gmax, fit.gnd, fit.sub, fit.copa, g1d, g1hist, w1g)
+    jpeg(output)
+    grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
+    dev.off()
+    return(outlist)
     
     } else if (estrato == 2){
       
@@ -147,10 +131,11 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
               strip.background = element_blank(),
               plot.background = element_blank()) +
         coord_flip()
-      output = list(gmax, fit.sub, fit.copa, g1d, g1hist, w1g)
-      graph = grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
-      print(graph)
-      return(output)
+      outlist = list(gmax, fit.sub, fit.copa, g1d, g1hist, w1g)
+      jpeg(output)
+      grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
+      dev.off()
+      return(outlist)
   
     } else {
     
@@ -176,9 +161,10 @@ CHPmodel = function(x, hbreak = 0.5, hground = 0.25, hmin = 0.01, estrato = 1, n
               strip.background = element_blank(),
               plot.background = element_blank()) +
         coord_flip()
-      output = list(gmax, fit.copa, g1d, g1hist, w1g)
-      graph = grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
-      print(graph)
-      return(output)      
+      outlist = list(gmax, fit.copa, g1d, g1hist, w1g)
+      jpeg(output)
+      grid.arrange(g1d, g1hist, w1g, nrow=1, ncol=3, top = paste(PLOT))
+      dev.off()
+      return(outlist)      
   }
 }
