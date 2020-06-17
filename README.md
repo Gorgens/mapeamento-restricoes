@@ -2,6 +2,8 @@
 
 Coordenador: Eric Bastos Gorgens (UFVJM)
 
+!(Fluxograma metodológico)[fuxo.png]
+
 ## Resultados
 
 1. Parâmetros para criação do modelo digital de terreno para floresta tropical
