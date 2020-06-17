@@ -2,7 +2,7 @@
 
 Coordenador: Eric Bastos Gorgens (UFVJM)
 
-!(Fluxograma metodológico)[fuxo.png]
+!(Fluxograma metodológico)[mapeamento-restricoes/fuxo.png]
 
 ## Resultados
 
