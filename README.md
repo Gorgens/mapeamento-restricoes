@@ -20,18 +20,18 @@ ANDRADE, Mariana Silva et al. Airborne laser scanning for terrain modeling in th
 
 3. Estimar de forma espacialmente explícita a biomassa
 
-![](layers/biomassa.jpg)
+![](layers/biomassa.png)
 
 4. Potencial produtivo daunidade de manejo
 
-![](emergent/potencial1.jpg)
+![](emergent/potencial1.png)
 
-![](emergent/potencial2.jpg)
+![](emergent/potencial2.png)
 
-![](emergent/potencial3.jpg)
+![](emergent/potencial3.png)
 
-![](emergent/potencial4.jpg)
+![](emergent/potencial4.png)
 
-![](emergent/potencial5.jpg)
+![](emergent/potencial5.png)
 
-![](emergent/potencial6.jpg)
+![](emergent/potencial6.png)
