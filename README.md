@@ -1,5 +1,3 @@
-# Mapeamento de restrições operacionais, das restrições ambientais e do potencial madeireiro numa área defloresta amazônica por meio do escaneamento laser aerotransportado
-
 Coordenador: Eric Bastos Gorgens (UFVJM)
 
 ![](fluxo.png)
