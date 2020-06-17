@@ -2,7 +2,7 @@
 
 Coordenador: Eric Bastos Gorgens (UFVJM)
 
-![](fuxo.png)
+![](fluxo.png)
 
 ## Resultados
 
