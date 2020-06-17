@@ -16,7 +16,7 @@ ANDRADE, Mariana Silva et al. Airborne laser scanning for terrain modeling in th
 
 2. Rede de drenagem e das áreas com limitações operacionais e ambientais relacionadasao terreno
 
-
+![](layers/retricoes.jpg)
 
 3. Estimar de forma espacialmente explícita a biomassa
 
