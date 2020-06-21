@@ -40,6 +40,12 @@ ANDRADE, Mariana Silva et al. Airborne laser scanning for terrain modeling in th
 
 ![](emergent/potencial6.png)
 
-- Monitoramento da vegetação
+- Monitoramento da vegetação e melhores indicadores
 
-[Inlcuir artigo Southern Forests)
+![](monitoring/indicators.png)
+
+![](monitoring/gaps.png)
+
+![](monitoring/rdm.png)
+
+Costa et al. Assessing the utility of ALS derived indicators for tropical forest management. Southern Forests. In press. 2020
